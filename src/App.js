@@ -16,25 +16,26 @@ class App extends Component {
       <div className="App">
         <Header />
         <Title />
-        {this.state.screen === 'skills' && (
-          <Route exact path="/skills" render={() => (
-            <Skills
-              onNavigate={() => {
-                this.setState({ screen: 'skills'});
-              }} 
-            />
-          )} />
-        )}
-        {this.state.screen === 'about' && (
-          <Route exact path="/about" render={() => (
-            <About
-              onNavigate={() => {
-                this.setState({ screen: 'about'});
-              }} 
-            />
-          )} />
-        )}
-        
+        <form>
+          {this.state.screen === 'skills' && (
+            <Route exact path="/skills" render={() => (
+              <Skills
+                onNavigate={() => {
+                  this.setState({ screen: 'skills'});
+                }} 
+              />
+            )} />
+          )}
+          {this.state.screen === 'about' && (
+            <Route exact path="/about" render={() => (
+              <About
+                onNavigate={() => {
+                  this.setState({ screen: 'about'});
+                }} 
+              />
+            )} />
+          )}
+        </form>
       </div>
     );
   }
