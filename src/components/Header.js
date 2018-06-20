@@ -27,7 +27,7 @@ export class Header extends Component {
             <header>
                 <ul style={navStyle}>
                     <li onClick={this.props.onNavigate}><NavLink to="/about" style={style}>About</NavLink></li>
-                    <li><NavLink to="/skills" style={style}>Skills</NavLink></li>
+                    <li onClick={this.props.onNavigate}><NavLink to="/skills" style={style}>Skills</NavLink></li>
                     <li><NavLink to="/portfolio" style={style}>Portfolio</NavLink></li>
                 </ul>
             </header>

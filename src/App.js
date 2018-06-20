@@ -6,18 +6,19 @@ import { Header } from './components/Header';
 import { Title } from './components/Title';
 import { About } from './components/About';
 import { Skills } from './components/Skills';
+import { Portfolio } from './components/Portfolio';
 
 class App extends Component {
   state = {
     screen: 'skills' //skills, portfolio
   }
+
   render() {
     return (
       <div className="App">
         <Header />
         <Title />
         <form>
-          {this.state.screen === 'skills' && (
             <Route exact path="/skills" render={() => (
               <Skills
                 onNavigate={() => {
@@ -25,8 +26,6 @@ class App extends Component {
                 }} 
               />
             )} />
-          )}
-          {this.state.screen === 'about' && (
             <Route exact path="/about" render={() => (
               <About
                 onNavigate={() => {
@@ -34,7 +33,13 @@ class App extends Component {
                 }} 
               />
             )} />
-          )}
+            <Route exact path="/portfolio" render={() => (
+              <Portfolio
+                onNavigate={() => {
+                  this.setState({ screen: 'portfolio'});
+                }} 
+              />
+            )} />
         </form>
       </div>
     );
