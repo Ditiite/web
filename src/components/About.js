@@ -111,7 +111,6 @@ export class About extends Component {
     }
 
     isSubmitDisabled = errors => {
-        
 		return Object.values(errors).some(errMsg => {
 			return errMsg;
 		});
@@ -129,7 +128,7 @@ export class About extends Component {
                 ? ''
                 : 'an invalid email address',
             reEnterEmail: (email === reEnterEmail)
-                ? console.log(this.state.email)
+                ? ''
                 : 'E-mails should match!',
             address: /[a-zA-Z][\w'\s,-]+/.test(address)
                 ? ''
