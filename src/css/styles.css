@@ -280,3 +280,6 @@ select:-webkit-autofill:focus {
 }
 
 
+.invalid {
+    color: rgb(248, 8, 8);
+}

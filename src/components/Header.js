@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { 
-    NavLink, 
-    Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../App.css';
 
 
@@ -19,9 +17,6 @@ const navStyle = {
 }
 
 export class Header extends Component {
-    constructor(props) {
-        super(props);
-    }
     render() {
         return(
             <header>

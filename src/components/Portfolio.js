@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { 
-    NavLink, 
-    Redirect } from "react-router-dom";
+// import { 
+//     NavLink, 
+//     Redirect } from "react-router-dom";
 import '../App.css';
 
 export class Portfolio extends Component{

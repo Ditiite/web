@@ -1,0 +1,16 @@
+{
+    "formInputs": [
+        {
+            "name": "",
+            "phone": "",
+            "email": "",
+            "reEnterEmail": "",
+            "address": "",
+            "city": "",
+            "state": "",
+            "country": "",
+            "zip": "",
+            "heardAboutUs": ""
+        }
+    ]
+}
