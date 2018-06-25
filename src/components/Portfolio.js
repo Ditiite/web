@@ -13,6 +13,7 @@ export class Portfolio extends Component{
                     Prove you're IBM's next great designer 
                     by showing us who you are. What you've done. 
                     How you think. Tell us your story.</p>
+                <label htmlFor="link"></label>
                 <input type="link" name="link" placeholder="Portfolio link *" id="link" />
                 <p id="linkError"></p>
                 <br />
