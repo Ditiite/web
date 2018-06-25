@@ -51,7 +51,6 @@ export class About extends Component {
     }
 
     handleChange(event){
-        console.log('say hello');
         const target = event.target;
 
         switch(target.name) {
@@ -106,8 +105,8 @@ export class About extends Component {
                     heardAboutUs: target.value
                 });
                 break;
-            // default:
-            //     this.setState({ name:'Please check your inputs!'})
+            default:
+                 this.setState({ name: 'Please check your inputs!'})
         }
     }
 
@@ -118,20 +117,20 @@ export class About extends Component {
 		});
 	};
 
-    validate= (name, phone, email, reEnterEmail, address, city, country, zip ) => {
+    validate= (name, phone, city, email, reEnterEmail, address, country, zip ) => {
         const errors = {
-            name:  /^[a-zA-Z]+$/.test(name)
+            name:  /^[a-zA-Z]+/.test(name)
                 ? ''
                 : 'you can have only alphabetic characters',
             phone: /[\d]{9}/.test(phone)
                 ? ''
                 : 'Please provide correct phone number!',
-            email: /^\w+@\w+\.\w{2,3}$/.test(email)
+            email: /[.?\w]+@[A-Za-z0-9]+.[A-Za-z]+/.test(email)
                 ? ''
                 : 'an invalid email address',
-            reEnterEmail: this.state.email.value !== this.state.reEnterEmail.value
-                ? ''
-                : 'an invalid email address',
+            reEnterEmail: (email === reEnterEmail)
+                ? console.log(this.state.email)
+                : 'E-mails should match!',
             address: /[a-zA-Z][\w'\s,-]+/.test(address)
                 ? ''
                 : 'an invalid address',
@@ -150,8 +149,8 @@ export class About extends Component {
     }
 
     render() {
-        const { name, phone, city, email, address, country, zip } = this.state;
-        const errors = this.validate( name, phone, city, email, address, country, zip );
+        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs } = this.state;
+        const errors = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
 
         return(
             <section className="info container">
@@ -174,14 +173,14 @@ export class About extends Component {
                         <label htmlFor="email"></label>
                         <input type="text" id="email" name="email" placeholder="Email *" 
                             className={errors.email ? 'invalid' : ''}
-                            value={ this.state.email }
+                            value={ email }
                             onChange={this.handleChange}/>
                         <p id="emailError" className="error-message">{errors.email}</p>
 
                         <label htmlFor="email-again"></label>
                         <input type="email" id="email-again" name="reEnterEmail" placeholder="Re-enter email *" 
                             className={errors.reEnterEmail ? 'invalid' : ''}
-                            value={ this.state.reEnterEmail }
+                            value={ reEnterEmail }
                             onChange={this.handleChange}/>
                         <p id="emailError2" className="error-message">{errors.reEnterEmail}</p>
 
@@ -190,7 +189,7 @@ export class About extends Component {
                         <label htmlFor="phone"></label>
                         <input type="text" id="phone" name="phone" placeholder="Phone *" 
                             className={errors.phone ? 'invalid' : ''}
-                            value={ this.state.phone }
+                            value={ phone }
                             onChange={this.handleChange}/>
                         <p id="phoneError">{errors.phone}</p>
                     </div>
@@ -199,7 +198,7 @@ export class About extends Component {
                 <label htmlFor="address"></label>
                 <input type="text" id="address" name="address" placeholder="Address *" 
                     className={errors.address ? 'invalid' : ''}
-                    value={ this.state.address }
+                    value={ address }
                     onChange={this.handleChange}/>
                 <p id="addressError">{errors.address}</p>
 
@@ -208,13 +207,13 @@ export class About extends Component {
                         <label htmlFor="city"></label>
                         <input type="text" id="city" name="city" placeholder="City *" 
                             className={errors.city ? 'invalid' : ''}
-                            value={ this.state.city }
+                            value={ city }
                             onChange={this.handleChange}/>
                         <p id="cityError">{errors.city}</p>
                     </div>
                     <div>
                         <input type="text" id="state" name="state" placeholder="State" 
-                            value={ this.state.state }
+                            value={ state }
                             onChange={this.handleChange}/>
                         <p id="stateError"></p>
                     </div>
@@ -223,7 +222,7 @@ export class About extends Component {
                         <label htmlFor="country"></label>
                         <input type="text" id="country" name="country" placeholder="Country/Region *"
                             className={errors.country ? 'invalid' : ''}
-                            value={ this.state.country }
+                            value={ country }
                             onChange={this.handleChange} /> 
                         <p id="countryError">{errors.country}</p>
                     </div>
@@ -231,14 +230,14 @@ export class About extends Component {
                         <label htmlFor="zip"></label>
                         <input type="text" id="zip" name="zip" placeholder="Zip/Postal code *" min="0"
                             className={errors.zip ? 'invalid' : ''} 
-                            value={ this.state.zip }
+                            value={ zip }
                             onChange={this.handleChange}/>
                         <p id="zipError">{errors.zip}</p>
                     </div>  
                 </div>
             
                 <input type="text" name="How did you hear about us" placeholder="How did you hear about us" 
-                    value={ this.state.heardAboutUs }
+                    value={ heardAboutUs }
                     onChange={this.handleChange}/>
                 <button type="submit" value="Submit" className="submit"
                     disabled={this.isSubmitDisabled(errors)}>

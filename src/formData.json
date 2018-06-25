@@ -10,7 +10,9 @@
             "state": "",
             "country": "",
             "zip": "",
-            "heardAboutUs": ""
+            "heardAboutUs": "",
+            "selectedDiscipline": "",
+            "interestedWorking": []
         }
     ]
 }

@@ -31,7 +31,7 @@ class App extends Component {
 			<div className="App">
 				<Header />
 				<Title />
-				<form onSubmit={this.handleSubmit}>
+				{/* <form onSubmit={this.handleSubmit}> */}
 					<Route exact path="/skills" render={() => (
 						<Skills
 							
@@ -54,7 +54,7 @@ class App extends Component {
 							}}
 						/>
 					)} />
-				</form>
+				{/* </form> */}
 			</div>
 		);
 	}
