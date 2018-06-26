@@ -29,7 +29,7 @@ export class Skills extends Component {
     handleCheck = e => {
         const value = e.target.value;
         const index = this.state.interestedWorking.indexOf(value);
-        
+
         index === -1
             ? this.setState(prevState => ({ interestedWorking: [...prevState.interestedWorking, value]}))
             : this.setState(prevState => {

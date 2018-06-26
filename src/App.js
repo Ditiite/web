@@ -49,6 +49,7 @@ class App extends Component {
 					)} />
 					<Route exact path="/portfolio" render={() => (
 						<Portfolio
+							isSubmitDisabled={this.isSubmitDisabled}
 							onNavigate={() => {
 								this.setState({ screen: 'portfolio' });
 							}}
