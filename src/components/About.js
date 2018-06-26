@@ -96,14 +96,8 @@ export class About extends Component {
         }
     }
 
-    isSubmitDisabled = errors => {
-		return Object.values(errors).some(errMsg => {
-			return errMsg;
-		});
-	};
-
     validate= (name, phone, city, email, reEnterEmail, address, country, zip ) => {
-        const errors = {
+        const error = {
             name:  /^[a-zA-Z]+/.test(name)
                 ? ''
                 : 'you can have only alphabetic characters',
@@ -130,104 +124,141 @@ export class About extends Component {
                 : 'an invalid zip'
         }
 
-        return errors;
+        return error;
     }
 
     render() {
         const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs } = this.state;
-        const errors = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
+        const error = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
 
         return(
             <section className="info container">
-            <form>
-                <h2>1. Personal Information</h2>
-                <div className="first-container">
-                    <div className="col-8">
-                    
-                        <label htmlFor="name"></label>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            placeholder="Full name *" 
-                            className={errors.name ? 'invalid' : ''}
-                            value={name}
-                            onChange={this.handleChange}/>
-                        <span id="nameError" className="err-msg">{errors.name}</span>
+                <form>
+                    <h2>1. Personal Information</h2>
+                    <div className="first-container">
+                        <div className="col-8">
+                        
+                            <label htmlFor="name"></label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                placeholder="Full name *" 
+                                className={error.name ? 'invalid' : ''}
+                                value={name}
+                                onChange={this.handleChange}/>
+                            <span id="nameError" className="err-msg">{error.name}</span>
 
-                        <label htmlFor="email"></label>
-                        <input type="text" id="email" name="email" placeholder="Email *" 
-                            className={errors.email ? 'invalid' : ''}
-                            value={ email }
-                            onChange={this.handleChange}/>
-                        <p id="emailError" className="error-message">{errors.email}</p>
+                            <label htmlFor="email"></label>
+                            <input 
+                                type="text" 
+                                id="email" 
+                                name="email" 
+                                placeholder="Email *" 
+                                className={error.email ? 'invalid' : ''}
+                                value={ email }
+                                onChange={this.handleChange}/>
+                            <p id="emailError" className="error-message">{error.email}</p>
 
-                        <label htmlFor="email-again"></label>
-                        <input type="email" id="email-again" name="reEnterEmail" placeholder="Re-enter email *" 
-                            className={errors.reEnterEmail ? 'invalid' : ''}
-                            value={ reEnterEmail }
-                            onChange={this.handleChange}/>
-                        <p id="emailError2" className="error-message">{errors.reEnterEmail}</p>
+                            <label htmlFor="email-again"></label>
+                            <input 
+                                type="email" 
+                                id="email-again" 
+                                name="reEnterEmail" 
+                                placeholder="Re-enter email *" 
+                                className={error.reEnterEmail ? 'invalid' : ''}
+                                value={ reEnterEmail }
+                                onChange={this.handleChange}/>
+                            <p id="emailError2" className="error-message">{error.reEnterEmail}</p>
 
+                        </div>
+                        <div className="col-4">
+                            <label htmlFor="phone"></label>
+                            <input 
+                                type="text" 
+                                id="phone" 
+                                name="phone" 
+                                placeholder="Phone *" 
+                                className={error.phone ? 'invalid' : ''}
+                                value={ phone }
+                                onChange={this.handleChange}/>
+                            <p id="phoneError">{error.phone}</p>
+                        </div>
                     </div>
-                    <div className="col-4">
-                        <label htmlFor="phone"></label>
-                        <input type="text" id="phone" name="phone" placeholder="Phone *" 
-                            className={errors.phone ? 'invalid' : ''}
-                            value={ phone }
-                            onChange={this.handleChange}/>
-                        <p id="phoneError">{errors.phone}</p>
-                    </div>
-                </div>
 
-                <label htmlFor="address"></label>
-                <input type="text" id="address" name="address" placeholder="Address *" 
-                    className={errors.address ? 'invalid' : ''}
-                    value={ address }
-                    onChange={this.handleChange}/>
-                <p id="addressError">{errors.address}</p>
+                    <label htmlFor="address"></label>
+                    <input 
+                        type="text" 
+                        id="address" 
+                        name="address" 
+                        placeholder="Address *" 
+                        className={error.address ? 'invalid' : ''}
+                        value={ address }
+                        onChange={this.handleChange}/>
+                    <p id="addressError">{error.address}</p>
 
-                <div className="city-data">
-                    <div>
-                        <label htmlFor="city"></label>
-                        <input type="text" id="city" name="city" placeholder="City *" 
-                            className={errors.city ? 'invalid' : ''}
-                            value={ city }
-                            onChange={this.handleChange}/>
-                        <p id="cityError">{errors.city}</p>
+                    <div className="city-data">
+                        <div>
+                            <label htmlFor="city"></label>
+                            <input 
+                                type="text" 
+                                id="city" 
+                                name="city" 
+                                placeholder="City *" 
+                                className={error.city ? 'invalid' : ''}
+                                value={ city }
+                                onChange={this.handleChange}/>
+                            <p id="cityError">{error.city}</p>
+                        </div>
+                        <div>
+                            <input 
+                                type="text" 
+                                id="state" 
+                                name="state" 
+                                placeholder="State" 
+                                value={ state }
+                                onChange={this.handleChange}/>
+                            <p id="stateError"></p>
+                        </div>
+                        
+                        <div>
+                            <label htmlFor="country"></label>
+                            <input 
+                                type="text" 
+                                id="country" 
+                                name="country" 
+                                placeholder="Country/Region *"
+                                className={error.country ? 'invalid' : ''}
+                                value={ country }
+                                onChange={this.handleChange} /> 
+                            <p id="countryError">{error.country}</p>
+                        </div>
+                        <div>
+                            <label htmlFor="zip"></label>
+                            <input 
+                                type="text" 
+                                id="zip" 
+                                name="zip" 
+                                placeholder="Zip/Postal code *" 
+                                min="0"
+                                className={error.zip ? 'invalid' : ''} 
+                                value={ zip }
+                                onChange={this.handleChange}/>
+                            <p id="zipError">{error.zip}</p>
+                        </div>  
                     </div>
-                    <div>
-                        <input type="text" id="state" name="state" placeholder="State" 
-                            value={ state }
-                            onChange={this.handleChange}/>
-                        <p id="stateError"></p>
-                    </div>
-                    
-                    <div>
-                        <label htmlFor="country"></label>
-                        <input type="text" id="country" name="country" placeholder="Country/Region *"
-                            className={errors.country ? 'invalid' : ''}
-                            value={ country }
-                            onChange={this.handleChange} /> 
-                        <p id="countryError">{errors.country}</p>
-                    </div>
-                    <div>
-                        <label htmlFor="zip"></label>
-                        <input type="text" id="zip" name="zip" placeholder="Zip/Postal code *" min="0"
-                            className={errors.zip ? 'invalid' : ''} 
-                            value={ zip }
-                            onChange={this.handleChange}/>
-                        <p id="zipError">{errors.zip}</p>
-                    </div>  
-                </div>
-            
-                <input type="text" name="How did you hear about us" placeholder="How did you hear about us" 
-                    value={ heardAboutUs }
-                    onChange={this.handleChange}/>
-                <button type="submit" value="Submit" className="submit"
-                    disabled={this.isSubmitDisabled(errors)}>
-                        Submit
-                </button>
+                
+                    <input 
+                        type="text" 
+                        name="How did you hear about us" 
+                        placeholder="How did you hear about us" 
+                        value={ heardAboutUs }
+                        onChange={this.handleChange}
+                    />
+                    <button type="submit" value="Submit" className="submit"
+                        disabled={this.props.isSubmitDisabled(error)}>
+                            Submit
+                    </button>
                 </form>
             </section>
         )

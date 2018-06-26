@@ -20,12 +20,6 @@ export class Skills extends Component {
         
     }
 
-    isSubmitDisabled = error => {
-		return Object.values(error).some(errMsg => {
-			return errMsg;
-		});
-    };
-    
     handleCheck = e => {
         const value = e.target.value;
         const index = this.state.interestedWorking.indexOf(value);
@@ -124,7 +118,7 @@ export class Skills extends Component {
                             validate={this.validate}/>
                     </div>
                     <button type="submit" value="Submit" className="submit"
-                        disabled={this.isSubmitDisabled(error)}>
+                        disabled={this.props.isSubmitDisabled(error)}>
                             Submit
                     </button>
                 </form>

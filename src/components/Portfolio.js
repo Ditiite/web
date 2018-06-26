@@ -44,14 +44,6 @@ export class Portfolio extends Component{
         return error;
     }
 
-
-	isSubmitDisabled = error => {
-		return Object.values(error).some(error=> {
-			return error;
-		});
-    };
-
-
     render() {
         const { link, information } = this.state;
         const error = this.validate( link );
@@ -71,7 +63,7 @@ export class Portfolio extends Component{
                         id="link"
                         value={ link }
                         onChange={this.handleChange} />
-                    <p id="addressError">{error.link}</p>
+                    <p className="error-message" id="addressError">{error.link}</p>
                     <br />
                     <textarea  
                         rows="5" 
@@ -84,7 +76,7 @@ export class Portfolio extends Component{
                         ></textarea>
                     <br />
                     <button type="submit" value="Submit" className="submit"
-                        disabled={this.isSubmitDisabled(error)}>
+                        disabled={this.props.isSubmitDisabled(error)}>
                             Submit
                     </button>
                 </form>

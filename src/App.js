@@ -26,6 +26,12 @@ class App extends Component {
 		});
 	}
 
+	isSubmitDisabled = error => {
+		return Object.values(error).some(error=> {
+			return error;
+		});
+	};
+	
 	render() {
 		return (
 			<div className="App">
@@ -34,7 +40,7 @@ class App extends Component {
 				{/* <form onSubmit={this.handleSubmit}> */}
 					<Route exact path="/skills" render={() => (
 						<Skills
-							
+							isSubmitDisabled={this.isSubmitDisabled}
 							onNavigate={() => {
 								this.setState({ screen: 'skills' });
 							}}
@@ -42,6 +48,7 @@ class App extends Component {
 					)} />
 					<Route exact path="/about" render={() => (
 						<About
+							isSubmitDisabled={this.isSubmitDisabled}
 							addData={this.addData}
 							onNavigate={() => {
 								this.setState({ screen: 'about' });
