@@ -22,32 +22,19 @@ export class About extends Component {
     handleSubmit = e => {
 		e.preventDefault();
 		e.target.reset();
-
-		// this.setState({
-        //     name: "",
-        //     phone: "",
-        //     email: "",
-        //     reEnterEmail: "",
-        //     address: "",
-        //     city: "",
-        //     state: "",
-        //     country: "",
-        //     zip: "",
-        //     heardAboutUs: ""
-		// })
         
-        // this.props.addData({
-        //     name: this.state.name,
-        //     phone: this.state.phone,
-        //     email: this.state.email,
-        //     reEnterEmail: this.state.reEnterEmail,
-        //     address: this.state.address,
-        //     city: this.state.city,
-        //     state: this.state.state,
-        //     country: this.state.country,
-        //     zip: this.state.zip,
-        //     heardAboutUs: this.state.heardAboutUs
-        // })
+        this.props.addData({
+           name: this.state.name,
+            phone: this.state.phone,
+            email: this.state.email,
+            reEnterEmail: this.state.reEnterEmail,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            country: this.state.country,
+            zip: this.state.zip,
+            heardAboutUs: this.state.heardAboutUs
+        })
     }
 
     handleChange(event){

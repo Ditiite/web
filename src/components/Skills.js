@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
+import LocationCheck from './LocationCheck';
 
 export class Skills extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedDiscipline: null,
+            selectedDiscipline: '',
             interestedWorking: []
         }
-        this.handleChane = this.handleChane.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
     }
 
-    handleChane(event) {
+    handleChange(event) {
         this.setState({
             selectedDiscipline: event.target.value
-        });
-        console.log(this.state.selectedDiscipline);
+        }, function (){console.log(this.state.selectedDiscipline);});
+        
         
     }
 
@@ -22,22 +24,38 @@ export class Skills extends Component {
 		return Object.values(error).some(errMsg => {
 			return errMsg;
 		});
-	};
+    };
+    
+    handleCheck = e => {
+        const value = e.target.value;
+        const index = this.state.interestedWorking.indexOf(value);
+        
+        index === -1
+            ? this.setState(prevState => ({ interestedWorking: [...prevState.interestedWorking, value]}))
+            : this.setState(prevState => {
+                return {
+                    interestedWorking: [
+                        ...prevState.interestedWorking.slice(0, index),
+                        ...prevState.interestedWorking.slice(index +1)
+                    ]
+                };
+            });
+    }
 
-    validate = (selectedDiscipline) => {
+    validate = (selectedDiscipline, interestedWorking) => {
         const error = {
-            selectedDiscipline: selectedDiscipline !== null
+            selectedDiscipline: selectedDiscipline !== ''
                 ? ""
-                : "Please select one of the disciplins!"
-            // interestedWorking: this.interestedWorking.length > 0
-            //     ? ""
-            //     : "Please select one of the places where are you interested working!"
+                : "Please select one of the disciplins!",
+            interestedWorking: interestedWorking.length > 0
+                ? ""
+                : "Please select one of the places where are you interested working!"
         }
         return error;
     }
     render() {
-        //const { selectedDiscipline, interestedWorking } = this.state;
-        const error = this.validate( this.state.selectedDiscipline, this.state.interestedWorking );
+        const { selectedDiscipline, interestedWorking } = this.state;
+        const error = this.validate( selectedDiscipline, interestedWorking );
         
         return(
             <section className="container">
@@ -50,28 +68,28 @@ export class Skills extends Component {
 
                             <input type="radio" name="design" id="research" 
                                 value="researchDesign"
-                                checked={this.state.selectedDiscipline === 'researchDesign'}
-                                onChange={this.handleChane}/>
+                                checked={selectedDiscipline === 'researchDesign'}
+                                onChange={this.handleChange}/>
                             <label htmlFor="research">Design Research</label>   
                         
                             <input type="radio" name="design" id="visual" 
                                 value="visualDesign"
-                                checked={this.state.selectedDiscipline === 'visualDesign'}
-                                onChange={this.handleChane}/>
+                                checked={selectedDiscipline === 'visualDesign'}
+                                onChange={this.handleChange}/>
                             <label htmlFor="visual">Visual Design</label>
                         
                         
                             <input type="radio" name="design" id="ux" 
                                 value="uxDesign"
-                                checked={this.state.selectedDiscipline === 'uxDesign'}
-                                onChange={this.handleChane}/>
+                                checked={selectedDiscipline === 'uxDesign'}
+                                onChange={this.handleChange}/>
                             <label htmlFor="ux" >UX Design</label>
                         
                         
                             <input type="radio" name="design" id="dev" 
                                 value="frontEndDev"
-                                checked={this.state.selectedDiscipline === 'frontEndDev'}
-                                onChange={this.handleChane}/>
+                                checked={selectedDiscipline === 'frontEndDev'}
+                                onChange={this.handleChange}/>
                             <label htmlFor="dev"> Front-end Dev</label>
                         </div>
                         <span className={error.name ? 'invalid' : ''}>{error.selectedDiscipline}</span> 
@@ -97,49 +115,13 @@ export class Skills extends Component {
 
                         </div>
 
-                        <div className="col-6">
-                            <p>Where are you interested working? *</p>
-                            <p>You must be legaly authorized to work without visa sponsorship in the location you choose.</p>
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" id="check_4" value="Austin-Texas"/>
-                                <label htmlFor="check_4">Austin, Texas</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" id="check_5" value="newYork"/>
-                                <label htmlFor="check_5">New York, New York</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" id="check_6" value="torontoCanada"/>
-                                <label htmlFor="check_6">Toronto, Canada</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" id="check_7" value="shanghaiChina"/>
-                                <label htmlFor="check_7">Shanghai, China</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check_8" id="check_8" value="dublinIrland"/>
-                                <label htmlFor="check_8">Dublin, Irland </label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check_9" id="check_9" value="hurskeyUk"/>
-                                <label htmlFor="check_9">Hursley, United Kingdom</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check_10" id="check_10" value="boblingenGermany"/>
-                                <label htmlFor="check_10">Boblingen, Germany</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check_11" id="check_11" value="somwhereElse"/>
-                                <label htmlFor="check_11">Somewhere else</label>
-                            </div>  
-                        </div>
+                        <LocationCheck 
+                            error={error}
+                            interestedWorking={this.state.interestedWorking}
+                            handleChange={this.handleChange}
+                            isSubmitDisabled={this.isSubmitDisabled}
+                            handleCheck={this.handleCheck}
+                            validate={this.validate}/>
                     </div>
                     <button type="submit" value="Submit" className="submit"
                         disabled={this.isSubmitDisabled(error)}>
