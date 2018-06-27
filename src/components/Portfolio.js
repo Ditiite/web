@@ -9,7 +9,10 @@ export class Portfolio extends Component{
         super(props);
         this.state = {
             link: '',
-            information: ''
+            information: '',
+            isTouched: {
+                link: false
+            }
         }
         this.handleChange = this.handleChange.bind(this);
     }
@@ -35,6 +38,17 @@ export class Portfolio extends Component{
         }
 	}
     
+    handleFocus = e => {
+        const inputField = e.target.name;
+        this.setState(prevState => ({
+            isTouched: {
+                ...prevState.isTouched,
+                [inputField]: true
+            }
+        }))
+    }
+
+
     validate = (link) => {
         const error = {
             link: /(^(http[s]?:\/\/)?|([w]{3}\.))?([/\w.=?:;"!&-]+)/.test(link)
@@ -60,10 +74,13 @@ export class Portfolio extends Component{
                         type="link" 
                         name="link" 
                         placeholder="Portfolio link *" 
-                        id="link"
+                        className={error.link && this.state.isTouched.link ? 'invalid' : ''}
                         value={ link }
+                        id="link"
+                        onBlur={this.handleFocus}
                         onChange={this.handleChange} />
-                    <p className="error-message" id="addressError">{error.link}</p>
+                    {this.state.isTouched.link &&
+                        error.link && <p className="error-message" id="addressError">{error.link}</p>}
                     <br />
                     <textarea  
                         rows="5" 

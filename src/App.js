@@ -38,6 +38,15 @@ class App extends Component {
 				<Header />
 				<Title />
 				{/* <form onSubmit={this.handleSubmit}> */}
+					<Route exact path="/about" render={() => (
+						<About
+							isSubmitDisabled={this.isSubmitDisabled}
+							addData={this.addData}
+							onBlur={this.handleFocus}
+							onNavigate={() => {
+								this.setState({ screen: 'about' });
+							}}/>
+					)} />
 					<Route exact path="/skills" render={() => (
 						<Skills
 							isSubmitDisabled={this.isSubmitDisabled}
@@ -46,17 +55,10 @@ class App extends Component {
 							}}
 						/>
 					)} />
-					<Route exact path="/about" render={() => (
-						<About
-							isSubmitDisabled={this.isSubmitDisabled}
-							addData={this.addData}
-							onNavigate={() => {
-								this.setState({ screen: 'about' });
-							}}/>
-					)} />
 					<Route exact path="/portfolio" render={() => (
 						<Portfolio
 							isSubmitDisabled={this.isSubmitDisabled}
+							onBlur={this.handleFocus}
 							onNavigate={() => {
 								this.setState({ screen: 'portfolio' });
 							}}

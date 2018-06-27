@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export class About extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             name: "",
             phone: "",
@@ -13,10 +14,32 @@ export class About extends Component {
             state: "",
             country: "",
             zip: "",
-            heardAboutUs: ""
+            heardAboutUs: "",
+            isTouched: {
+                name: false,
+                phone: false,
+                email: false,
+                reEnterEmail: false,
+                address: false,
+                city: false,
+                country: false,
+                zip: false
+            }
         }
+
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleFocus = e => {
+        const inputField = e.target.name;
+        this.setState(prevState => ({
+            isTouched: {
+                ...prevState.isTouched,
+                [inputField]: true
+            }
+        }));
     }
 
     handleSubmit = e => {
@@ -128,7 +151,7 @@ export class About extends Component {
     }
 
     render() {
-        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs } = this.state;
+        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
         const error = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
 
         return(
@@ -137,17 +160,18 @@ export class About extends Component {
                     <h2>1. Personal Information</h2>
                     <div className="first-container">
                         <div className="col-8">
-                        
                             <label htmlFor="name"></label>
                             <input 
                                 type="text" 
                                 id="name" 
                                 name="name" 
                                 placeholder="Full name *" 
-                                className={error.name ? 'invalid' : ''}
+                                className={error.name && isTouched.name ? 'invalid' : ''}
                                 value={name}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <span id="nameError" className="err-msg">{error.name}</span>
+                            {isTouched.name &&
+                                error.name &&  <p id="nameError" className="err-msg">{error.name}</p>}
 
                             <label htmlFor="email"></label>
                             <input 
@@ -155,10 +179,12 @@ export class About extends Component {
                                 id="email" 
                                 name="email" 
                                 placeholder="Email *" 
-                                className={error.email ? 'invalid' : ''}
+                                className={error.email && isTouched.email ? 'invalid' : ''}
                                 value={ email }
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <p id="emailError" className="error-message">{error.email}</p>
+                            {isTouched.email &&
+                                error.email && <p id="emailError" className="error-message">{error.email}</p>}
 
                             <label htmlFor="email-again"></label>
                             <input 
@@ -166,10 +192,13 @@ export class About extends Component {
                                 id="email-again" 
                                 name="reEnterEmail" 
                                 placeholder="Re-enter email *" 
-                                className={error.reEnterEmail ? 'invalid' : ''}
-                                value={ reEnterEmail }
+                                className={error.reEnterEmail && isTouched.reEnterEmail ? 'invalid' : ''}
+                                value={reEnterEmail}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <p id="emailError2" className="error-message">{error.reEnterEmail}</p>
+                            {isTouched.reEnterEmail &&
+                                error.reEnterEmail && <p id="emailError2" className="error-message">{error.reEnterEmail}</p>}
+                            
 
                         </div>
                         <div className="col-4">
@@ -179,10 +208,12 @@ export class About extends Component {
                                 id="phone" 
                                 name="phone" 
                                 placeholder="Phone *" 
-                                className={error.phone ? 'invalid' : ''}
-                                value={ phone }
+                                className={error.phone && isTouched.phone ? 'invalid' : ''}
+                                value={phone}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <p id="phoneError">{error.phone}</p>
+                            {isTouched.phone &&
+                                error.phone && <p id="phoneError">{error.phone}</p>}
                         </div>
                     </div>
 
@@ -192,10 +223,12 @@ export class About extends Component {
                         id="address" 
                         name="address" 
                         placeholder="Address *" 
-                        className={error.address ? 'invalid' : ''}
-                        value={ address }
+                        className={error.address && isTouched.address ? 'invalid' : ''}
+                        value={address}
+                        onBlur={this.handleFocus}
                         onChange={this.handleChange}/>
-                    <p id="addressError">{error.address}</p>
+                    {isTouched.address &&
+                        error.address && <p id="addressError">{error.address}</p>}
 
                     <div className="city-data">
                         <div>
@@ -205,10 +238,12 @@ export class About extends Component {
                                 id="city" 
                                 name="city" 
                                 placeholder="City *" 
-                                className={error.city ? 'invalid' : ''}
-                                value={ city }
+                                className={error.city && isTouched.city ? 'invalid' : ''}
+                                value={city}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <p id="cityError">{error.city}</p>
+                            {isTouched.city &&
+                                error.city &&<p id="cityError">{error.city}</p>}
                         </div>
                         <div>
                             <input 
@@ -228,10 +263,12 @@ export class About extends Component {
                                 id="country" 
                                 name="country" 
                                 placeholder="Country/Region *"
-                                className={error.country ? 'invalid' : ''}
-                                value={ country }
+                                className={error.country && isTouched.country? 'invalid' : ''}
+                                value={country}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange} /> 
-                            <p id="countryError">{error.country}</p>
+                            {isTouched.country &&
+                                error.country &&<p id="countryError">{error.country}</p>}
                         </div>
                         <div>
                             <label htmlFor="zip"></label>
@@ -241,10 +278,12 @@ export class About extends Component {
                                 name="zip" 
                                 placeholder="Zip/Postal code *" 
                                 min="0"
-                                className={error.zip ? 'invalid' : ''} 
-                                value={ zip }
+                                className={error.zip && isTouched.zip ? 'invalid' : ''} 
+                                value={zip}
+                                onBlur={this.handleFocus}
                                 onChange={this.handleChange}/>
-                            <p id="zipError">{error.zip}</p>
+                            {isTouched.zip &&
+                                error.zip && <p id="zipError">{error.zip}</p>}
                         </div>  
                     </div>
                 
