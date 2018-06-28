@@ -17,6 +17,16 @@ export class Portfolio extends Component{
         this.handleChange = this.handleChange.bind(this);
     }
     
+    handleSubmit = e => {
+        e.preventDefault();
+
+        this.props.addData({
+            link: this.state.link,
+            information: this.state.information
+        });
+    }
+
+
     handleChange(event){
         const target = event.target;
 
@@ -63,7 +73,7 @@ export class Portfolio extends Component{
         const error = this.validate( link );
         return(
             <section className="portfolio container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <h2>3. Portfolio</h2>
                     <p>
                         Prove you're IBM's next great designer 

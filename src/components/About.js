@@ -46,18 +46,18 @@ export class About extends Component {
 		e.preventDefault();
 		e.target.reset();
         
-        // this.props.addData({
-        //    name: this.state.name,
-        //     phone: this.state.phone,
-        //     email: this.state.email,
-        //     reEnterEmail: this.state.reEnterEmail,
-        //     address: this.state.address,
-        //     city: this.state.city,
-        //     state: this.state.state,
-        //     country: this.state.country,
-        //     zip: this.state.zip,
-        //     heardAboutUs: this.state.heardAboutUs
-        // })
+        this.props.addData({
+            name: this.state.name,
+            phone: this.state.phone,
+            email: this.state.email,
+            reEnterEmail: this.state.reEnterEmail,
+            address: this.state.address,
+            city: this.state.city,
+            state: this.state.state,
+            country: this.state.country,
+            zip: this.state.zip,
+            heardAboutUs: this.state.heardAboutUs
+        });
     }
 
     handleChange(event){
@@ -156,7 +156,7 @@ export class About extends Component {
 
         return(
             <section className="info container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <h2>1. Personal Information</h2>
                     <div className="first-container">
                         <div className="col-8">

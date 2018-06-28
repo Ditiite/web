@@ -12,6 +12,16 @@ export class Skills extends Component {
         this.handleCheck = this.handleCheck.bind(this);
     }
 
+    handleSubmit = e => {
+        e.preventDefault();
+        
+        this.props.addData({
+            selectedDiscipline: this.state.selectedDiscipline,
+            interestedWorking: this.state.interestedWorking
+        });
+    }
+
+
     handleChange(event) {
         this.setState({
             selectedDiscipline: event.target.value
@@ -53,7 +63,7 @@ export class Skills extends Component {
         
         return(
             <section className="container">
-                <form>
+                <form onSubmit={this.handleSubmit}>
                     <h2>2. Skill and location</h2>
 
                     <div>

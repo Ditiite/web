@@ -8,6 +8,7 @@ import { About } from './components/About';
 import { Skills } from './components/Skills';
 import { Portfolio } from './components/Portfolio';
 import { formInputs } from './formData.json';
+import { CheckData } from './components/CheckData';
 
 class App extends Component {
 	constructor(props) {
@@ -15,6 +16,7 @@ class App extends Component {
 		this.state = {
 			formInputs: formInputs
 		}
+		console.log("hello",this.state.formInputs);
 		this.addData = this.addData.bind(this);
 	}
 
@@ -24,7 +26,7 @@ class App extends Component {
 			newState.formInputs.push(formInput);
 			return newState;
 		});
-	}
+	};
 
 	isSubmitDisabled = error => {
 		return Object.values(error).some(error=> {
@@ -33,6 +35,7 @@ class App extends Component {
 	};
 	
 	render() {
+		console.log("ABOUT US", this.state.formInputs);
 		return (
 			<div className="App">
 				<Header />
@@ -50,6 +53,7 @@ class App extends Component {
 					<Route exact path="/skills" render={() => (
 						<Skills
 							isSubmitDisabled={this.isSubmitDisabled}
+							addData={this.addData}
 							onNavigate={() => {
 								this.setState({ screen: 'skills' });
 							}}
@@ -58,9 +62,19 @@ class App extends Component {
 					<Route exact path="/portfolio" render={() => (
 						<Portfolio
 							isSubmitDisabled={this.isSubmitDisabled}
+							addData={this.addData}
 							onBlur={this.handleFocus}
 							onNavigate={() => {
 								this.setState({ screen: 'portfolio' });
+							}}
+						/>
+					)} />
+					<Route exact path="/checkInfo" render={() => (
+						<CheckData
+							formInput={this.state.formInputs}
+							isSubmitDisabled={this.isSubmitDisabled}
+							onNavigate={() => {
+								this.setState({ screen: 'checkInfo' });
 							}}
 						/>
 					)} />
