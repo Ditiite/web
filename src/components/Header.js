@@ -16,7 +16,7 @@ const navStyle = {
     margin: '30px 0 50px'
 }
 
-export class Header extends Component {
+class Header extends Component {
     render() {
         return(
             <header>
@@ -30,3 +30,5 @@ export class Header extends Component {
         );
     }
 }
+
+export default Header;

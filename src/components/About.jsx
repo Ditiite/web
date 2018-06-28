@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
-export class About extends Component {
+class About extends Component {
     constructor(props) {
         super(props);
 
@@ -26,97 +27,20 @@ export class About extends Component {
                 zip: false
             }
         }
-
-
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleFocus = e => {
-        const inputField = e.target.name;
-        this.setState(prevState => ({
-            isTouched: {
-                ...prevState.isTouched,
-                [inputField]: true
-            }
-        }));
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+        console.log(this.state);
     }
 
-    handleSubmit = e => {
-		e.preventDefault();
-		e.target.reset();
-        
-        this.props.addData({
-            name: this.state.name,
-            phone: this.state.phone,
-            email: this.state.email,
-            reEnterEmail: this.state.reEnterEmail,
-            address: this.state.address,
-            city: this.state.city,
-            state: this.state.state,
-            country: this.state.country,
-            zip: this.state.zip,
-            heardAboutUs: this.state.heardAboutUs
-        });
-    }
-
-    handleChange(event){
-        const target = event.target;
-
-        switch(target.name) {
-            case 'name':
-                this.setState({
-                    name: target.value
-                });
-                break;
-            case 'phone':
-                this.setState({
-                    phone: target.value
-                });
-                break;
-            case 'email':
-                this.setState({
-                    email: target.value
-                });
-                break;
-            case 'reEnterEmail':
-                this.setState({
-                    reEnterEmail: target.value
-                });
-                break;
-            case 'address':
-                this.setState({
-                    address: target.value
-                });
-                break;
-            case 'city':
-                this.setState({
-                    city: target.value
-                });
-                break;
-            case 'state':
-                this.setState({
-                    state: target.value
-                });
-                break;
-            case 'country':
-                this.setState({
-                    country: target.value
-                });
-                break;
-            case 'zip':
-                this.setState({
-                    zip: target.value
-                });
-                break;
-            case 'heardAboutUs':
-                this.setState({
-                    heardAboutUs: target.value
-                });
-                break;
-            default:
-                 this.setState({ name: 'Please check your inputs!'})
-        }
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit(this.state);
+        console.log(this.state);
     }
 
     validate= (name, phone, city, email, reEnterEmail, address, country, zip ) => {
@@ -149,7 +73,6 @@ export class About extends Component {
 
         return error;
     }
-
     render() {
         const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
         const error = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
@@ -169,7 +92,7 @@ export class About extends Component {
                                 className={error.name && isTouched.name ? 'invalid' : ''}
                                 value={name}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={e => this.handleChange(e)}/>
                             {isTouched.name &&
                                 error.name &&  <p id="nameError" className="err-msg">{error.name}</p>}
 
@@ -294,12 +217,16 @@ export class About extends Component {
                         value={ heardAboutUs }
                         onChange={this.handleChange}
                     />
-                    <button type="submit" value="Submit" className="submit"
-                        disabled={this.props.isSubmitDisabled(error)}>
-                            Submit
+                    <button type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
+                         {/* disabled={this.props.isSubmitDisabled(error)}> */}
+                            <NavLink to ="skills">
+                                Next
+                            </NavLink>
                     </button>
                 </form>
             </section>
-        )
+        );
     }
 }
+
+export default About;

@@ -1,46 +1,41 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
+import { NavLink } from 'react-router-dom';
 import LocationCheck from './LocationCheck';
+import ExtraDesign from './ExtraDesign';
 
-export class Skills extends Component {
+class Skills extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedDiscipline: '',
-            interestedWorking: []
+            interestedWorking: [],
+            extraDesign: []
         }
-        this.handleChange = this.handleChange.bind(this);
-        this.handleCheck = this.handleCheck.bind(this);
     }
 
-    handleSubmit = e => {
-        e.preventDefault();
-        
-        this.props.addData({
-            selectedDiscipline: this.state.selectedDiscipline,
-            interestedWorking: this.state.interestedWorking
-        });
-    }
-
-
-    handleChange(event) {
+    handleChange = e => {
         this.setState({
-            selectedDiscipline: event.target.value
-        }, function (){console.log(this.state.selectedDiscipline);});
-        
-        
+            [e.target.name]: e.target.value
+        })
+        console.log('new',this.state);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.onSubmit(this.state);
+        console.log(this.state);
     }
 
     handleCheck = e => {
         const value = e.target.value;
-        const index = this.state.interestedWorking.indexOf(value);
+        const index = this.state[e.target.name].indexOf(value);
 
         index === -1
-            ? this.setState(prevState => ({ interestedWorking: [...prevState.interestedWorking, value]}))
+            ? this.setState(prevState => ({ [e.target.name]: [...prevState[e.target.name], value]}))
             : this.setState(prevState => {
                 return {
-                    interestedWorking: [
-                        ...prevState.interestedWorking.slice(0, index),
-                        ...prevState.interestedWorking.slice(index +1)
+                    [e.target.name]: [
+                        ...prevState[e.target.name].slice(0, index),
+                        ...prevState[e.target.name].slice(index +1)
                     ]
                 };
             });
@@ -57,8 +52,9 @@ export class Skills extends Component {
         }
         return error;
     }
+
     render() {
-        const { selectedDiscipline, interestedWorking } = this.state;
+        const { selectedDiscipline, interestedWorking, extraDesign } = this.state;
         const error = this.validate( selectedDiscipline, interestedWorking );
         
         return(
@@ -100,39 +96,32 @@ export class Skills extends Component {
                     </div>
 
                     <div className="checkbox-section">
-                        <div className="col-6">
-                            <p>Do you have experience with any other disciplines?</p>
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" value="visualDesign" id="check_1" />
-                                <label htmlFor="check_1">Visual Design</label>
-                            </div>
-                            
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" value="uxDesign" id="check_2" />
-                                <label htmlFor="check_2">UX Design</label>
-                            </div>
-
-                            <div className="checkbox">
-                                <input type="checkbox" name="check" value="frontEnd" id="check_3" />
-                                <label htmlFor="check_3">Front-end </label>
-                            </div>
-
-                        </div>
-
+                        <ExtraDesign 
+                            error={error}
+                            extraDesign={extraDesign}
+                            handleChange={this.handleChange}
+                            isSubmitDisabled={this.isSubmitDisabled}
+                            handleCheck={this.handleCheck}
+                        />
                         <LocationCheck 
                             error={error}
                             interestedWorking={this.state.interestedWorking}
                             handleChange={this.handleChange}
                             isSubmitDisabled={this.isSubmitDisabled}
                             handleCheck={this.handleCheck}
-                            validate={this.validate}/>
+                            validate={this.validate}
+                        />
                     </div>
-                    <button type="submit" value="Submit" className="submit"
-                        disabled={this.props.isSubmitDisabled(error)}>
-                            Submit
+                    
+                    <button type="submit" value="Submit" className="submit">
+                        {/* disabled={this.props.isSubmitDisabled(error)}>*/}
+                            <NavLink to="portfolio"> Next </NavLink> 
                     </button>
+                   
                 </form>
             </section>
-        )
+        );
     }
 }
+
+export default Skills;

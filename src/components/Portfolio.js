@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-// import { 
-//     NavLink, 
-//     Redirect } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import '../App.css';
 
 export class Portfolio extends Component{
@@ -20,12 +18,14 @@ export class Portfolio extends Component{
     handleSubmit = e => {
         e.preventDefault();
 
-        this.props.addData({
-            link: this.state.link,
-            information: this.state.information
-        });
+       
     }
 
+    isSubmitDisabled = error => {
+		return Object.values(error).some(error=> {
+			return error;
+		});
+	};
 
     handleChange(event){
         const target = event.target;
@@ -45,7 +45,7 @@ export class Portfolio extends Component{
                 this.setState({
                     link: 'Link is not valid.'
                 })
-        }
+        };
 	}
     
     handleFocus = e => {
@@ -102,10 +102,12 @@ export class Portfolio extends Component{
                         onChange={this.handleChange}
                         ></textarea>
                     <br />
-                    <button type="submit" value="Submit" className="submit"
-                        disabled={this.props.isSubmitDisabled(error)}>
-                            Submit
-                    </button>
+                    
+                        <button type="submit" value="Submit" className="submit"
+                            disabled={this.props.isSubmitDisabled(error)}>
+                               <Link to="checkInfo"> Next </Link>
+                        </button>
+                   
                 </form>
             </section>
         );
