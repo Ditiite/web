@@ -1,113 +1,110 @@
 import React, { Component } from 'react';
+import { RequiredInput, NotRequiredInput } from './InpupObj';
 import { Link } from 'react-router-dom';
-import '../App.css';
 
-export class Portfolio extends Component{
+
+export class Portfolio extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            link: '',
-            information: '',
+            name: "",
+            phone: "",
+            email: "",
+            reEnterEmail: "",
+            address: "",
+            city: "",
+            state: "",
+            country: "",
+            zip: "",
+            heardAboutUs: "",
             isTouched: {
-                link: false
+                name: false,
+                phone: false,
+                email: false,
+                reEnterEmail: false,
+                address: false,
+                city: false,
+                country: false,
+                zip: false
             }
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
-    
-    handleSubmit = e => {
+
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+        console.log(this.state);
+    }
+
+    handleSubmit(e)  {
         e.preventDefault();
-
-       
+        this.props.onSubmit(this.state);
+        console.log(this.state);
     }
 
-    isSubmitDisabled = error => {
-		return Object.values(error).some(error=> {
-			return error;
-		});
-	};
-
-    handleChange(event){
-        const target = event.target;
-
-        switch(target.name) {
-            case 'link':
-                this.setState({
-                    link: target.value
-                });
-                break;
-            case 'information':
-                this.setState({
-                    information: target.value
-                });
-                break;
-            default:
-                this.setState({
-                    link: 'Link is not valid.'
-                })
-        };
-	}
-    
-    handleFocus = e => {
-        const inputField = e.target.name;
-        this.setState(prevState => ({
-            isTouched: {
-                ...prevState.isTouched,
-                [inputField]: true
-            }
-        }))
-    }
-
-
-    validate = (link) => {
+    validate = (name, phone, city, email, reEnterEmail, address, country, zip) => {
         const error = {
-            link: /(^(http[s]?:\/\/)?|([w]{3}\.))?([/\w.=?:;"!&-]+)/.test(link)
-                ? ""
-                : "Please provide profile link!"
+            name: /^[a-zA-Z]+/.test(name)
+                ? ''
+                : 'you can have only alphabetic characters',
+            phone: /[\d]{9}/.test(phone)
+                ? ''
+                : 'Please provide correct phone number!',
+            email: /[.?\w]+@[A-Za-z0-9]+.[A-Za-z]+/.test(email)
+                ? ''
+                : 'an invalid email address',
+            reEnterEmail: (email === reEnterEmail)
+                ? ''
+                : 'E-mails should match!',
+            address: /[a-zA-Z][\w'\s,-]+/.test(address)
+                ? ''
+                : 'an invalid address',
+            city: /[a-zA-Z][\w\s'-]+/.test(city)
+                ? ''
+                : 'an invalid city',
+            country: /[a-zA-Z][\w\s'-]+/.test(country)
+                ? ''
+                : 'an invalid country',
+            zip: /[\w-]{3,9}/.test(zip)
+                ? ''
+                : 'an invalid zip'
         }
+
         return error;
     }
-
-    render() {
-        const { link, information } = this.state;
-        const error = this.validate( link );
+    render(){
+        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
+        const error = this.validate(name, phone, city, email, reEnterEmail, address, country, zip);
         return(
-            <section className="portfolio container">
+            <section className="info container">
                 <form onSubmit={this.handleSubmit}>
-                    <h2>3. Portfolio</h2>
-                    <p>
-                        Prove you're IBM's next great designer 
-                        by showing us who you are. What you've done. 
-                        How you think. Tell us your story.</p>
-                    <label htmlFor="link"></label>
-                    <input 
-                        type="link" 
-                        name="link" 
-                        placeholder="Portfolio link *" 
-                        className={error.link && this.state.isTouched.link ? 'invalid' : ''}
-                        value={ link }
-                        id="link"
-                        onBlur={this.handleFocus}
-                        onChange={this.handleChange} />
-                    {this.state.isTouched.link &&
-                        error.link && <p className="error-message" id="addressError">{error.link}</p>}
-                    <br />
-                    <textarea  
-                        rows="5" 
-                        cols="1" 
-                        name="information"
-                        placeholder="Anything else (another link, availability, etc)?" 
-                        id="information"
-                        value={ information }
-                        onChange={this.handleChange}
-                        ></textarea>
-                    <br />
-                    
-                        <button type="submit" value="Submit" className="submit"
-                            disabled={this.props.isSubmitDisabled(error)}>
-                               <Link to="checkInfo"> Next </Link>
-                        </button>
-                   
+                    <h2>1. Personal Information</h2>
+                    <div className="first-container">
+                        <div className="col-8">
+                            { 
+                                RequiredInput.map((name, i) =>
+                                <label htmlFor={name.name}>
+                                        <input key={i} 
+                                            type={name.type}
+                                            id={name.id}
+                                            name={name.name}
+                                            placeholder={name.placeholder}
+                                            className={error.name && isTouched.name ? 'invalid' : ''}
+                                            />
+                                </label>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <button type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
+                        {/* disabled={this.props.isSubmitDisabled(error)}> */}
+                        <Link to="skills">
+                            Next
+                        </Link>
+                    </button>
                 </form>
             </section>
         );

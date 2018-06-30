@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { About } from './About';
 import { Skills } from './Skills.jsx';
 import { CheckData } from './CheckData';
+import { Portfolio } from './Portfolio';
 
 export class Form extends Component {
     constructor(props){
@@ -32,6 +33,10 @@ export class Form extends Component {
                  <Route exact path="/checkData" render={() => (
                     <CheckData 
                     inputFields={this.state}/>
+                )}
+                />
+                <Route exact path="/skills" render={() => (
+                    <Portfolio onSubmit={inputFields => this.onSubmit(inputFields)} />
                 )}
                 />
             </div>
