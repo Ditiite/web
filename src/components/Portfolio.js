@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { RequiredInput, NotRequiredInput } from './InpupObj';
-import { Link } from 'react-router-dom';
-
+import { InputFields } from './InputFields';
+import { requiredInput } from './InputObj';
 
 export class Portfolio extends Component {
     constructor(props) {
@@ -27,22 +26,20 @@ export class Portfolio extends Component {
                 city: false,
                 country: false,
                 zip: false
-            }
+           }
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = e => {
+        this.props.onChange({
+            [e.target.name]: e.target.value
+        })
+        console.log(e.target.name, e.target.value);
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state);
-    }
-
-    handleSubmit(e)  {
-        e.preventDefault();
-        this.props.onSubmit(this.state);
-        console.log(this.state);
+        //console.log(this.state);
     }
 
     validate = (name, phone, city, email, reEnterEmail, address, country, zip) => {
@@ -75,36 +72,45 @@ export class Portfolio extends Component {
 
         return error;
     }
+
     render(){
         const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
         const error = this.validate(name, phone, city, email, reEnterEmail, address, country, zip);
+        
         return(
             <section className="info container">
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <h2>1. Personal Information</h2>
                     <div className="first-container">
                         <div className="col-8">
-                            { 
-                                RequiredInput.map((name, i) =>
-                                <label htmlFor={name.name}>
-                                        <input key={i} 
-                                            type={name.type}
-                                            id={name.id}
-                                            name={name.name}
-                                            placeholder={name.placeholder}
+                            {
+                                requiredInput.map( (item) => {
+                                    const {
+                                        name,
+                                        type,
+                                        id,
+                                        placeholder
+                                    } = item;
+
+                                    return (
+                                        <InputFields
+                                            key={name}
+                                            type={type}
+                                            name={name}
+                                            id={name}
+                                            placeholder={placeholder}
                                             className={error.name && isTouched.name ? 'invalid' : ''}
-                                            />
-                                </label>
-                                )
+                                            value={this.state[name]}
+                                            handleChange={this.handleChange} 
+                                            onBlur={this.handleFocus}
+                                            {isTouched.name &&
+                                                error.name && <p id="nameError" className="err-msg">{error.name}</p>}
+                                        />
+                                    );
+                                })
                             }
                         </div>
                     </div>
-                    <button type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
-                        {/* disabled={this.props.isSubmitDisabled(error)}> */}
-                        <Link to="skills">
-                            Next
-                        </Link>
-                    </button>
                 </form>
             </section>
         );

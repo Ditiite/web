@@ -27,16 +27,16 @@ export class Form extends Component {
                 )}
                 />
                 <Route exact path="/skills" render={() => (
-                    <Skills  onSubmit= { inputFields => this.onChange(inputFields)}/>
+                    <Skills onChange= { inputFields => this.onChange(inputFields)}/>
                 )}
                 />
-                 <Route exact path="/checkData" render={() => (
-                    <CheckData 
-                    inputFields={this.state}/>
+                <Route exact path="/portfolio" render={() => (
+                    <Portfolio onChange={inputFields => this.onChange(inputFields)} />
                 )}
                 />
-                <Route exact path="/skills" render={() => (
-                    <Portfolio onSubmit={inputFields => this.onSubmit(inputFields)} />
+                <Route exact path="/checkData" render={() => (
+                    <CheckData
+                        inputFields={this.state} />
                 )}
                 />
             </div>

@@ -129,11 +129,11 @@ export class Skills extends Component {
                         />
                     </div>
                     
-                   {/* <button > */}
-                         {/* disabled={this.props.isSubmitDisabled(error)}> */}
-                         <Link to ="skills" type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
-                                Next
-                            </Link>
+                    {/* <button > */}
+                    {/* disabled={this.props.isSubmitDisabled(error)}> */}
+                    <Link to="skills" type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
+                        Next
+                    </Link>
                     {/* </button> */}
                    
                 </form>
