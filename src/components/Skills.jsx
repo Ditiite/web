@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import LocationCheck from './LocationCheck';
-import ExtraDesign from './ExtraDesign';
+import { ExtraDesign } from './ExtraDesign';
 
-class Skills extends Component {
+export class Skills extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,23 +19,39 @@ class Skills extends Component {
         console.log('new',this.state);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.onSubmit(this.state);
-        console.log(this.state);
-    }
+    // handleSubmit(e) {
+    //     e.preventDefault();
+    //     this.props.onSubmit(this.state);
+    //     console.log(this.state);
+    // }
 
     handleCheck = e => {
         const value = e.target.value;
-        const index = this.state[e.target.name].indexOf(value);
-
+        const index = this.state.interestedWorking.indexOf(value);
+        
         index === -1
-            ? this.setState(prevState => ({ [e.target.name]: [...prevState[e.target.name], value]}))
+            ? this.setState(prevState => ({ interestedWorking: [...prevState.interestedWorking, value]}))
             : this.setState(prevState => {
                 return {
-                    [e.target.name]: [
-                        ...prevState[e.target.name].slice(0, index),
-                        ...prevState[e.target.name].slice(index +1)
+                    interestedWorking: [
+                        ...prevState.interestedWorking.slice(0, index),
+                        ...prevState.interestedWorking.slice(index +1)
+                    ]
+                };
+            });
+    }
+
+    handleCheckDesign = e => {
+        const value = e.target.value;
+        const index = this.state.extraDesign.indexOf(value);
+        
+        index === -1
+            ? this.setState(prevState => ({ extraDesign: [...prevState.extraDesign, value]}))
+            : this.setState(prevState => {
+                return {
+                    extraDesign: [
+                        ...prevState.extraDesign.slice(0, index),
+                        ...prevState.extraDesign.slice(index +1)
                     ]
                 };
             });
@@ -54,7 +70,7 @@ class Skills extends Component {
     }
 
     render() {
-        const { selectedDiscipline, interestedWorking, extraDesign } = this.state;
+        const { selectedDiscipline, interestedWorking } = this.state;
         const error = this.validate( selectedDiscipline, interestedWorking );
         
         return(
@@ -98,10 +114,10 @@ class Skills extends Component {
                     <div className="checkbox-section">
                         <ExtraDesign 
                             error={error}
-                            extraDesign={extraDesign}
+                            extraDesign={this.state.extraDesign}
                             handleChange={this.handleChange}
                             isSubmitDisabled={this.isSubmitDisabled}
-                            handleCheck={this.handleCheck}
+                            handleCheckDesign={this.handleCheckDesign}
                         />
                         <LocationCheck 
                             error={error}
@@ -113,15 +129,15 @@ class Skills extends Component {
                         />
                     </div>
                     
-                    <button type="submit" value="Submit" className="submit">
-                        {/* disabled={this.props.isSubmitDisabled(error)}>*/}
-                            <NavLink to="portfolio"> Next </NavLink> 
-                    </button>
+                   {/* <button > */}
+                         {/* disabled={this.props.isSubmitDisabled(error)}> */}
+                         <Link to ="skills" type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
+                                Next
+                            </Link>
+                    {/* </button> */}
                    
                 </form>
             </section>
         );
     }
 }
-
-export default Skills;

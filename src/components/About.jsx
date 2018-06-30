@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-class About extends Component {
+export class About extends Component {
     constructor(props) {
         super(props);
 
@@ -27,21 +27,24 @@ class About extends Component {
                 zip: false
             }
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange = e => {
+        this.props.onChange({
+            [e.target.name]: e.target.value
+        })
         this.setState({
             [e.target.name]: e.target.value
         })
-        console.log(this.state);
+        //console.log(this.state);
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.onSubmit(this.state);
-        console.log(this.state);
-    }
+    // handleSubmit(e) {
+    //     e.preventDefault();
+    //     this.props.onSubmit(this.state);
+    //     console.log('Submit',this.state);
+    // }
 
     validate= (name, phone, city, email, reEnterEmail, address, country, zip ) => {
         const error = {
@@ -79,7 +82,7 @@ class About extends Component {
 
         return(
             <section className="info container">
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <h2>1. Personal Information</h2>
                     <div className="first-container">
                         <div className="col-8">
@@ -217,16 +220,14 @@ class About extends Component {
                         value={ heardAboutUs }
                         onChange={this.handleChange}
                     />
-                    <button type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
+                    {/* <button > */}
                          {/* disabled={this.props.isSubmitDisabled(error)}> */}
-                            <NavLink to ="skills">
+                            <Link to ="skills" type="submit" value="Submit" className="submit" onSubmit={this.handleSubmit}>
                                 Next
-                            </NavLink>
-                    </button>
+                            </Link>
+                    {/* </button> */}
                 </form>
             </section>
         );
     }
 }
-
-export default About;

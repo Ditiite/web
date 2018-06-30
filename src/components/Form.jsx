@@ -1,35 +1,40 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
-import About from './About';
-import Skills from './Skills.jsx';
+import { About } from './About';
+import { Skills } from './Skills.jsx';
+import { CheckData } from './CheckData';
 
-
-class Form extends Component {
+export class Form extends Component {
     constructor(props){
         super(props);
         this.state = {
-            inputFields: {}
+            
         }
     }
 
-    onSubmit = inputFields => {
-        console.log('Thi is from parent', inputFields);
+    onChange = newValue => {
+        this.setState(newValue);
+        console.log('Thi is from parent', this.state);
     }
 
     render() {
+        console.log('Thi is from parent render', this.state.inputFields);
         return(
             <div>
                 <Route exact path="/about" render={() => (
-                    <About onSubmit= { inputFields => this.onSubmit(inputFields)}/>
+                    <About onChange= { inputFields => this.onChange(inputFields)}/>
                 )}
                 />
                 <Route exact path="/skills" render={() => (
-                    <Skills  onSubmit= { inputFields => this.onSubmit(inputFields)}/>
+                    <Skills  onSubmit= { inputFields => this.onChange(inputFields)}/>
+                )}
+                />
+                 <Route exact path="/checkData" render={() => (
+                    <CheckData 
+                    inputFields={this.state}/>
                 )}
                 />
             </div>
         );
     }
 }
-
-export default Form;

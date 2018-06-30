@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-class ExtraDesign extends Component {
+export class ExtraDesign extends Component {
+    
     render(){
         const { handleCheck, extraDesign } = this.props;
         return(
@@ -19,8 +20,8 @@ class ExtraDesign extends Component {
                 <div className="checkbox">
                     <input 
                         type="checkbox" 
-                        name="check" i
-                        d="check_1" 
+                        name="check" 
+                        id="check_1" 
                         value="visualDesign" 
                         onChange={handleCheck}
                         checked={extraDesign.includes('visualDesign')}/>
@@ -53,5 +54,3 @@ class ExtraDesign extends Component {
         );
     }
 }
-
-export default ExtraDesign;
