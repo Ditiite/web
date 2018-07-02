@@ -1,3 +1,4 @@
+// Input fields for first section -> About
 export const requiredInput = [
     {
         "name": "name",
@@ -60,3 +61,11 @@ export const requiredInput = [
         "placeholder": "How did you hear about us"
     }
 ];
+
+// Radio Buttns
+
+//Checkboxes for other disciplines
+
+// Checkboxes for location 
+
+
