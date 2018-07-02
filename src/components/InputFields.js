@@ -7,19 +7,26 @@ export function InputFields(props) {
         id,
         placeholder,
         value,
-        handleChange
+        handleChange,
+        error
     } = props;
 
     return( 
-        <label htmlFor={name}>
-            <input
-                type={type}
-                id={id}
-                name={name}
-                placeholder={placeholder} 
-                value={value}
-                onChange={handleChange}
-            />
-        </label>
+        <div>
+            <label htmlFor={name}>
+                <input
+                    type={type}
+                    id={id}
+                    name={name}
+                    placeholder={placeholder} 
+                    value={value}
+                    onChange={handleChange}
+                />
+            </label>
+
+            <p id="nameError" className="err-msg">
+                {error[name]}
+            </p>
+        </div>
     );
 }

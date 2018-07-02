@@ -16,17 +16,17 @@ export class Portfolio extends Component {
             state: "",
             country: "",
             zip: "",
-            heardAboutUs: "",
-            isTouched: {
-                name: false,
-                phone: false,
-                email: false,
-                reEnterEmail: false,
-                address: false,
-                city: false,
-                country: false,
-                zip: false
-           }
+            heardAboutUs: ""
+        //     isTouched: {
+        //         name: false,
+        //         phone: false,
+        //         email: false,
+        //         reEnterEmail: false,
+        //         address: false,
+        //         city: false,
+        //         country: false,
+        //         zip: false
+        //    }
         }
         // this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -74,7 +74,7 @@ export class Portfolio extends Component {
     }
 
     render(){
-        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
+        const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, validate } = this.state;
         const error = this.validate(name, phone, city, email, reEnterEmail, address, country, zip);
         
         return(
@@ -99,12 +99,11 @@ export class Portfolio extends Component {
                                             name={name}
                                             id={name}
                                             placeholder={placeholder}
-                                            className={error.name && isTouched.name ? 'invalid' : ''}
+                                            className={error.name ? 'invalid' : ''}
                                             value={this.state[name]}
                                             handleChange={this.handleChange} 
-                                            onBlur={this.handleFocus}
-                                            {isTouched.name &&
-                                                error.name && <p id="nameError" className="err-msg">{error.name}</p>}
+                                            error={error}
+                                            validate={validate}
                                         />
                                     );
                                 })
