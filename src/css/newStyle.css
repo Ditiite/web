@@ -1,7 +1,7 @@
 /* __________NEW WAY________________*/
 .info {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 
         "title title title title"
         "name name name phone"
@@ -15,7 +15,10 @@
 }
 
 .info h2 { grid-area: title; }
-.submit { grid-area: button; }
+.submit { 
+    grid-area: button; 
+    width: 100px;
+}
 
 #name { grid-area: name; }
 
@@ -44,3 +47,18 @@
 
 #heardAboutUs { grid-area: heardAboutUs; }
 
+button {
+    background: transparent;
+    padding: 10px 20px;
+    color: white;
+    border: 1px solid rgb(192, 192, 192);
+    width: 140px;
+}
+
+.submit {
+    background-color: #00aff9;
+    color: white;
+    border: 1px solid rgb(192, 192, 192);
+    width: 140px;
+    cursor: pointer;
+}

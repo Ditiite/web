@@ -210,15 +210,6 @@ input[type="radio"]:checked + label {
     resize: none;
 }
 
-.submit {
-    background-color: #00aff9;
-    padding: 10px 20px;
-    color: white;
-    border: 1px solid rgb(192, 192, 192);
-    width: 140px;
-    cursor: pointer;
-}
-
 .portfolio input:first-of-type {
     background-color: #444e58;
     border: none;

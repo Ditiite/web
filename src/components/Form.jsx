@@ -21,11 +21,10 @@ export class Form extends Component {
     render() {
         console.log('Thi is from parent render', this.state.inputFields);
         return (
-            <div>
+            <React.Fragment>
                 <Route exact path="/about" render={() => (
                     <About
                         onChange={inputFields => this.onChange(inputFields)}
-                    // isSubmitDisabled={this.isSubmitDisableds}
                     />
                 )}
                 />
@@ -42,7 +41,7 @@ export class Form extends Component {
                         inputFields={this.state} />
                 )}
                 />
-            </div>
+            </React.Fragment>
         );
     }
 }

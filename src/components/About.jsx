@@ -31,7 +31,7 @@ export class About extends Component {
                 zip: false
             }
         }
-        // this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleChange = e => {
@@ -42,7 +42,6 @@ export class About extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
-        //console.log(this.state);
     }
 
     handleSubmit = e => {
@@ -130,8 +129,8 @@ export class About extends Component {
                         );
                     })
                 }
-                <Link to="/skills" >
-                    <button type="submit" className="submit" disabled={this.isSubmitDisabled(error)}>
+                <Link to="/skills" className="submit">
+                    <button type="submit" disabled={this.isSubmitDisabled(error)}>
                         Next
                     </button>
                 </Link>
