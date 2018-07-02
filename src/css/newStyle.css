@@ -1,0 +1,46 @@
+/* __________NEW WAY________________*/
+.info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+        "title title title title"
+        "name name name phone"
+        "email email email ."
+        "reEnterEmail reEnterEmail reEnterEmail ."
+        "address address address address"
+        "city country state zip"
+        "heardAboutUs heardAboutUs heardAboutUs heardAboutUs"
+        ". . . button";
+    grid-gap: 10px;
+}
+
+.info h2 { grid-area: title; }
+.submit { grid-area: button; }
+
+#name { grid-area: name; }
+
+#phone { grid-area: phone; }
+
+#email { grid-area: email; }
+
+#reEnterEmail { grid-area: reEnterEmail; }
+
+#city { grid-area: city; }
+
+#country { grid-area: country; }
+
+#zip { grid-area: zip; }
+
+#address {
+    background-color: #444e58;
+    color: silver;
+    border: none;
+    width: 100%;
+    font-size: 0.9em;
+    grid-area: address;
+}
+
+#state { grid-area: state; }
+
+#heardAboutUs { grid-area: heardAboutUs; }
+

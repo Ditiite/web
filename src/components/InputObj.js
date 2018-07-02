@@ -46,9 +46,17 @@ export const requiredInput = [
         "type": "text",
         "id": "zip",
         "placeholder": "Zip/Postal code *"
+    },
+    {
+        "name": "state",
+        "type": "text",
+        "id": "state",
+        "placeholder": "State"
+    },
+    {
+        "name": "heardAboutUs",
+        "type": "text",
+        "id": "heardAboutUs",
+        "placeholder": "How did you hear about us"
     }
 ];
-export const NotRequiredInput = [
-    "state",
-    "heardAboutUs"
-]

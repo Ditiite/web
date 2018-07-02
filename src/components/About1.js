@@ -28,7 +28,6 @@ export class About extends Component {
             }
         }
 
-
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -44,9 +43,9 @@ export class About extends Component {
     }
 
     handleSubmit = e => {
-		e.preventDefault();
-		// e.target.reset();
-        
+        e.preventDefault();
+        // e.target.reset();
+
         this.props.addData({
             name: this.state.name,
             phone: this.state.phone,
@@ -61,10 +60,10 @@ export class About extends Component {
         });
     }
 
-    handleChange(event){
+    handleChange(event) {
         const target = event.target;
 
-        switch(target.name) {
+        switch (target.name) {
             case 'name':
                 this.setState({
                     name: target.value
@@ -116,13 +115,13 @@ export class About extends Component {
                 });
                 break;
             default:
-                 this.setState({ name: 'Please check your inputs!'})
+                this.setState({ name: 'Please check your inputs!' })
         }
     }
 
-    validate= (name, phone, city, email, reEnterEmail, address, country, zip ) => {
+    validate = (name, phone, city, email, reEnterEmail, address, country, zip) => {
         const error = {
-            name:  /^[a-zA-Z]+/.test(name)
+            name: /^[a-zA-Z]+/.test(name)
                 ? ''
                 : 'you can have only alphabetic characters',
             phone: /[\d]{9}/.test(phone)
@@ -153,152 +152,152 @@ export class About extends Component {
 
     render() {
         const { name, phone, city, email, reEnterEmail, address, state, country, zip, heardAboutUs, isTouched } = this.state;
-        const error = this.validate( name, phone, city, email, reEnterEmail, address, country, zip );
+        const error = this.validate(name, phone, city, email, reEnterEmail, address, country, zip);
 
-        return(
+        return (
             <section className="info container">
                 <form onSubmit={this.handleSubmit}>
                     <h2>1. Personal Information</h2>
                     <div className="first-container">
                         <div className="col-8">
                             <label htmlFor="name"></label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                placeholder="Full name *" 
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Full name *"
                                 className={error.name && isTouched.name ? 'invalid' : ''}
                                 value={name}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.name &&
-                                error.name &&  <p id="nameError" className="err-msg">{error.name}</p>}
+                                error.name && <p id="nameError" className="err-msg">{error.name}</p>}
 
                             <label htmlFor="email"></label>
-                            <input 
-                                type="text" 
-                                id="email" 
-                                name="email" 
-                                placeholder="Email *" 
+                            <input
+                                type="text"
+                                id="email"
+                                name="email"
+                                placeholder="Email *"
                                 className={error.email && isTouched.email ? 'invalid' : ''}
-                                value={ email }
+                                value={email}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.email &&
                                 error.email && <p id="emailError" className="error-message">{error.email}</p>}
 
                             <label htmlFor="email-again"></label>
-                            <input 
-                                type="email" 
-                                id="email-again" 
-                                name="reEnterEmail" 
-                                placeholder="Re-enter email *" 
+                            <input
+                                type="email"
+                                id="email-again"
+                                name="reEnterEmail"
+                                placeholder="Re-enter email *"
                                 className={error.reEnterEmail && isTouched.reEnterEmail ? 'invalid' : ''}
                                 value={reEnterEmail}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.reEnterEmail &&
                                 error.reEnterEmail && <p id="emailError2" className="error-message">{error.reEnterEmail}</p>}
-                            
+
 
                         </div>
                         <div className="col-4">
                             <label htmlFor="phone"></label>
-                            <input 
-                                type="text" 
-                                id="phone" 
-                                name="phone" 
-                                placeholder="Phone *" 
+                            <input
+                                type="text"
+                                id="phone"
+                                name="phone"
+                                placeholder="Phone *"
                                 className={error.phone && isTouched.phone ? 'invalid' : ''}
                                 value={phone}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.phone &&
                                 error.phone && <p id="phoneError">{error.phone}</p>}
                         </div>
                     </div>
 
                     <label htmlFor="address"></label>
-                    <input 
-                        type="text" 
-                        id="address" 
-                        name="address" 
-                        placeholder="Address *" 
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        placeholder="Address *"
                         className={error.address && isTouched.address ? 'invalid' : ''}
                         value={address}
                         onBlur={this.handleFocus}
-                        onChange={this.handleChange}/>
+                        onChange={this.handleChange} />
                     {isTouched.address &&
                         error.address && <p id="addressError">{error.address}</p>}
 
                     <div className="city-data">
                         <div>
                             <label htmlFor="city"></label>
-                            <input 
-                                type="text" 
-                                id="city" 
-                                name="city" 
-                                placeholder="City *" 
+                            <input
+                                type="text"
+                                id="city"
+                                name="city"
+                                placeholder="City *"
                                 className={error.city && isTouched.city ? 'invalid' : ''}
                                 value={city}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.city &&
-                                error.city &&<p id="cityError">{error.city}</p>}
+                                error.city && <p id="cityError">{error.city}</p>}
                         </div>
                         <div>
-                            <input 
-                                type="text" 
-                                id="state" 
-                                name="state" 
-                                placeholder="State" 
-                                value={ state }
-                                onChange={this.handleChange}/>
+                            <input
+                                type="text"
+                                id="state"
+                                name="state"
+                                placeholder="State"
+                                value={state}
+                                onChange={this.handleChange} />
                             <p id="stateError"></p>
                         </div>
-                        
+
                         <div>
                             <label htmlFor="country"></label>
-                            <input 
-                                type="text" 
-                                id="country" 
-                                name="country" 
+                            <input
+                                type="text"
+                                id="country"
+                                name="country"
                                 placeholder="Country/Region *"
-                                className={error.country && isTouched.country? 'invalid' : ''}
+                                className={error.country && isTouched.country ? 'invalid' : ''}
                                 value={country}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange} /> 
+                                onChange={this.handleChange} />
                             {isTouched.country &&
-                                error.country &&<p id="countryError">{error.country}</p>}
+                                error.country && <p id="countryError">{error.country}</p>}
                         </div>
                         <div>
                             <label htmlFor="zip"></label>
-                            <input 
-                                type="text" 
-                                id="zip" 
-                                name="zip" 
-                                placeholder="Zip/Postal code *" 
+                            <input
+                                type="text"
+                                id="zip"
+                                name="zip"
+                                placeholder="Zip/Postal code *"
                                 min="0"
-                                className={error.zip && isTouched.zip ? 'invalid' : ''} 
+                                className={error.zip && isTouched.zip ? 'invalid' : ''}
                                 value={zip}
                                 onBlur={this.handleFocus}
-                                onChange={this.handleChange}/>
+                                onChange={this.handleChange} />
                             {isTouched.zip &&
                                 error.zip && <p id="zipError">{error.zip}</p>}
-                        </div>  
+                        </div>
                     </div>
-                
-                    <input 
-                        type="text" 
-                        name="How did you hear about us" 
-                        placeholder="How did you hear about us" 
-                        value={ heardAboutUs }
+
+                    <input
+                        type="text"
+                        name="How did you hear about us"
+                        placeholder="How did you hear about us"
+                        value={heardAboutUs}
                         onChange={this.handleChange}
                     />
                     <button type="submit" value="Submit" className="submit"
                         disabled={this.props.isSubmitDisabled(error)}>
-                            <Link to ="skills">
-                                Next
+                        <Link to="skills">
+                            Next
                             </Link>
                     </button>
                 </form>

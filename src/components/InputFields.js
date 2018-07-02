@@ -8,25 +8,29 @@ export function InputFields(props) {
         placeholder,
         value,
         handleChange,
-        error
+        handleFocus,
+        error,
+        isTouched
     } = props;
-
-    return( 
-        <div>
+    console.log('isTouched.name', isTouched.name)
+    return (
+        <div id={id}>
             <label htmlFor={name}>
                 <input
                     type={type}
-                    id={id}
                     name={name}
-                    placeholder={placeholder} 
+                    placeholder={placeholder}
                     value={value}
                     onChange={handleChange}
+                    onBlur={handleFocus}
                 />
+                {isTouched[name] &&
+                    error.name &&
+                    <p id="nameError" className="err-msg">
+                        {error[name]}
+                    </p>
+                }
             </label>
-
-            <p id="nameError" className="err-msg">
-                {error[name]}
-            </p>
         </div>
     );
 }

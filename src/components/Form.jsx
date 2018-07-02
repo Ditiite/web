@@ -6,11 +6,9 @@ import { CheckData } from './CheckData';
 import { Portfolio } from './Portfolio';
 
 export class Form extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {
-            
-        }
+        this.state = {}
     }
 
     onChange = newValue => {
@@ -18,16 +16,21 @@ export class Form extends Component {
         console.log('Thi is from parent', this.state);
     }
 
+
+
     render() {
         console.log('Thi is from parent render', this.state.inputFields);
-        return(
+        return (
             <div>
                 <Route exact path="/about" render={() => (
-                    <About onChange= { inputFields => this.onChange(inputFields)}/>
+                    <About
+                        onChange={inputFields => this.onChange(inputFields)}
+                    // isSubmitDisabled={this.isSubmitDisableds}
+                    />
                 )}
                 />
                 <Route exact path="/skills" render={() => (
-                    <Skills onChange= { inputFields => this.onChange(inputFields)}/>
+                    <Skills onChange={inputFields => this.onChange(inputFields)} />
                 )}
                 />
                 <Route exact path="/portfolio" render={() => (
