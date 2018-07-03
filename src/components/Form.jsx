@@ -8,12 +8,14 @@ import { Portfolio } from './Portfolio';
 export class Form extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+        }
     }
 
     onChange = newValue => {
         this.setState(newValue);
-        console.log('Thi is from parent', this.state);
+
+        console.log("STATE PARENT selectedDiscipline", this.state.selectedDiscipline);
     }
 
 
@@ -29,7 +31,8 @@ export class Form extends Component {
                 )}
                 />
                 <Route exact path="/skills" render={() => (
-                    <Skills onChange={inputFields => this.onChange(inputFields)} />
+                    <Skills
+                        onChange={selectedDiscipline => this.onChange(selectedDiscipline)} />
                 )}
                 />
                 <Route exact path="/portfolio" render={() => (

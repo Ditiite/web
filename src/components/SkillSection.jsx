@@ -6,7 +6,6 @@ import { RadioButtons } from './RadioButtons';
 export class Skills extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             selectedDiscipline: ''
         }
@@ -15,20 +14,20 @@ export class Skills extends Component {
     handleChange = event => {
         this.setState({
             selectedDiscipline: event.target.value
-        }, function () { 
-            console.log("STATE selectedDiscipline", this.state.selectedDiscipline); 
+        }, function () {
+            console.log("STATE selectedDiscipline", this.state.selectedDiscipline);
         });
 
         this.props.onChange({
-            selectedDiscipline: this.state.selectedDiscipline
+            selectedDiscipline: event.target.value
         });
     }
-   
+
     render() {
         // const { selectedDiscipline, location, validate } = this.state;
         // const error = this.validate(selectedDiscipline, location);
 
-        return(
+        return (
             <section className="container">
                 <form>
                     <h2>2. Skill and location</h2>
@@ -49,8 +48,8 @@ export class Skills extends Component {
                                         key={id}
                                         type={type}
                                         name={name}
-                                        id={id}    
-                                        selectedDiscipline={this.state.selectedDiscipline}                                
+                                        id={id}
+                                        selectedDiscipline={this.state.selectedDiscipline}
                                         value={value}
                                         handleChange={this.handleChange}
                                     />

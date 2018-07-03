@@ -2,8 +2,8 @@ import React from 'react';
 
 export function InputFields(props) {
     const {
-        name,
         type,
+        name,
         id,
         placeholder,
         value,
@@ -12,7 +12,7 @@ export function InputFields(props) {
         error,
         isTouched
     } = props;
-    
+
     console.log('isTouched.name', isTouched.name)
 
     return (

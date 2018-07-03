@@ -8,7 +8,6 @@ import '../css/newStyle.css';
 export class About extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             name: "",
             phone: "",
@@ -31,7 +30,6 @@ export class About extends Component {
                 zip: false
             }
         }
-
     }
 
     handleChange = e => {
@@ -99,7 +97,8 @@ export class About extends Component {
     render() {
         const { name, phone, city, email, reEnterEmail, address, country, zip, heardAboutUs, validate, isTouched } = this.state;
         const error = this.validate(name, phone, city, email, reEnterEmail, address, country, zip, heardAboutUs);
-        console.log('isTouched', isTouched)
+
+        console.log('About state', this.state);
         return (
             <form className="info container" onSubmit={this.handleSubmit}>
                 <h2>1. Personal Information</h2>

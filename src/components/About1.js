@@ -298,7 +298,7 @@ export class About extends Component {
                         disabled={this.props.isSubmitDisabled(error)}>
                         <Link to="skills">
                             Next
-                            </Link>
+                        </Link>
                     </button>
                 </form>
             </section>
