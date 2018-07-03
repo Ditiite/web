@@ -12,7 +12,9 @@ export function InputFields(props) {
         error,
         isTouched
     } = props;
+    
     console.log('isTouched.name', isTouched.name)
+
     return (
         <div id={id}>
             <label htmlFor={name}>

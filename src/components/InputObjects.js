@@ -63,6 +63,32 @@ export const requiredInput = [
 ];
 
 // Radio Buttns
+export const radioButtons = [
+    {
+        "name": "design",
+        "id": "research",
+        "type": "radio",
+        "value": "research design"
+    },
+    {
+        "name": "design",
+        "id": "visual",
+        "type": "radio",
+        "value": "visual design"
+    },
+    {
+        "name": "design",
+        "id": "ux",
+        "type": "radio",
+        "value": "UX design"
+    },
+    {
+        "name": "design",
+        "id": "fronEnd",
+        "type": "radio",
+        "value": "Front End Dev"
+    }
+];
 
 //Checkboxes for other disciplines
 

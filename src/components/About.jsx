@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { InputFields } from './InputFields';
-import { requiredInput } from './InputObj';
+import { requiredInput } from './InputObjects';
 import { Link } from 'react-router-dom';
 
 import '../css/newStyle.css';

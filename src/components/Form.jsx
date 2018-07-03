@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from "react-router-dom";
 import { About } from './About';
-import { Skills } from './Skills.jsx';
+import { Skills } from './SkillSection';
 import { CheckData } from './CheckData';
 import { Portfolio } from './Portfolio';
 
