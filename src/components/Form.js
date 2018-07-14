@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import '../css/styles.css';
 import FormFirstPage from './FormPages/FormFirstPage';
-//import FormSecondPage from './FormPages/FormSecondPage';
-//import FormThirdPage from './FormPages/FormThirdPage';
+import FormSecondPage from './FormPages/FormSecondPage';
+import FormThirdPage from './FormPages/FormThirdPage';
 
 
 class Form extends Component {
@@ -20,7 +20,7 @@ class Form extends Component {
         })
     }
 
-    prevPage = () => {
+    previousPage = () => {
         this.setState({
             page: this.state.page - 1
         })
@@ -35,12 +35,12 @@ class Form extends Component {
                     <FormFirstPage
                         onSubmit={this.nextPage} />}
                 {page === 2 &&
-                    <FormFirstPage
-                        prevPage={this.prevPage}
+                    <FormSecondPage
+                        previousPage={this.previousPage}
                         onSubmit={this.nextPage} />}
-                {page === 2 &&
-                    <FormFirstPage
-                        prevPage={this.prevPage}
+                {page === 3 &&
+                    <FormThirdPage
+                        previousPage={this.previousPage}
                         onSubmit={onSubmit} />}
             </div>
         );

@@ -15,8 +15,9 @@ const initialState = [{
 }];
 
 const rootReducer = combineReducers({
-    form: formReducer
-})
+    form: formReducer  //mount under form
+});
+
 const store = createStore(
     rootReducer,
     initialState,
