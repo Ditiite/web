@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './css/styles.css';
 import './App.css';
 import { Values } from "redux-form-website-template";
-import { Header } from './components/Header';
+// import { Header } from './components/Header';
 import { Title } from './components/Title';
 import Form from './components/Form';
 
@@ -20,11 +20,10 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Header />
+				{/* <Header /> */}
 				<Title />
-				<h2>Wizard Example</h2>
 				<Form onSubmit={showResults} />
-				<Values form="wizard" />
+				<Values form="portfolioForm" />
 			</div>
 		);
 	}

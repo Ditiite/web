@@ -1,56 +1,42 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-// import validate from '../../validate/validate';
+import validate from '../../validate/validate';
 
-const colors = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet'];
-
-const renderColorSelector = ({ input, meta: { touched, error } }) => (
-    <div>
-        <select {...input}>
-            <option value="">Select a color...</option>
-            {colors.map(val => <option value={val} key={val}>{val}</option>)}
-        </select>
-        {touched && error && <span>{error}</span>}
-    </div>
-)
-
-const FormThirdPage = props => {
-    const { handleSubmit, pristine, prevPage, submitting } = props
+const FormThirdPage = props =>  {
+    const { handleSubmit, previousPage, pristine, submitting } = props
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label>Favorite Color</label>
-                <Field name="favoriteColor" component={renderColorSelector} />
-            </div>
-            <div>
-                <label htmlFor="employed">Employed</label>
-                <div>
-                    <Field
-                        name="employed"
-                        id="employed"
-                        component="input"
-                        type="checkbox"
-                    />
-                </div>
-            </div>
-            <div>
-                <label>Notes</label>
-                <div>
-                    <Field name="notes" component="textarea" placeholder="Notes" />
-                </div>
-            </div>
-            <div>
-                <button type="button" className="previous" onClick={prevPage}>
-                    Previous
-        </button>
-                <button type="submit" disabled={pristine || submitting}>Submit</button>
-            </div>
+        <form onSubmit={handleSubmit} className="portfolio container">
+            <h2>3. Portfolio</h2>
+            <p>
+                Prove you're IBM's next great designer
+                by showing us who you are. What you've done.
+                How you think. Tell us your story.</p>
+            <label htmlFor="link"></label>
+            <Field
+                type="link"
+                name="link"
+                id="link" 
+                component="input" />
+            <Field
+                rows="5"
+                cols="1"
+                name="information"
+                id="information"
+                component="textarea" />
+            <br />
+            <button type="button" className="previous" onClick={previousPage}>
+                Previous
+                </button>
+            <button type="submit" disabled={pristine || submitting} className="submit" >
+                Submit 
+            </button>
         </form>
-    )
+    );
 }
+
 export default reduxForm({
-    form: 'wizard', //Form name is same
+    form: 'portfolioForm', //Form name is same
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
-    // validate
+    validate
 })(FormThirdPage)

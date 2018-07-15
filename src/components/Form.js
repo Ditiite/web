@@ -42,6 +42,10 @@ class Form extends Component {
                     <FormThirdPage
                         previousPage={this.previousPage}
                         onSubmit={onSubmit} />}
+                {/* {page === 4 &&
+                    <FormCheckData
+                        previousPage={this.previousPage}
+                        onSubmit={onSubmit} />} */}
             </div>
         );
     }
