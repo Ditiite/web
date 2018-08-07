@@ -6,11 +6,19 @@ import { LocationCheck } from '../LocationCheck';
 //import validate from '../../validate/validate';
 
 
-const renderError = ({ meta: { touched, error }}) =>
+const renderError = ({ meta: { touched, error } }) =>
     touched && error ? <span>{error}</span> : false;
 
+const validate = values => {
+    const error = {};
+    if (!values.design) {
+        error.design = 'Please select one of the desidn discipline!'
+    }
+
+}
+
 const FormSecondPage = props => {
-    const { handleSubmit, previousPage, pristine, submitting} = props;
+    const { handleSubmit, previousPage, pristine, submitting } = props;
     return (
         <form onSubmit={handleSubmit} className="container">
             <h2>2.Skills and location</h2>
@@ -22,7 +30,7 @@ const FormSecondPage = props => {
                     UX design
                 </label>
                 <label htmlFor="visual">
-                    <Field name="design" id="visual"component="input" type="radio" value="Visual Design" />
+                    <Field name="design" id="visual" component="input" type="radio" value="Visual Design" />
                     {' '}
                     Front-end dev
                 </label>

@@ -8,15 +8,18 @@ import { createStore, combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form'
 
 const initialState = [{
-    
+    people: {
+        firstName: 'Hello',
+        phoneNumber: 9898999
+    }
 }];
 
 const rootReducer = combineReducers({
-    form: formReducer  //mount under form
-});
-
+    form: formReducer
+})
 const store = createStore(
     rootReducer,
+    initialState,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
@@ -24,5 +27,5 @@ ReactDOM.render(
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </Provider>
-    , document.getElementById('root'));
+    </Provider>, 
+    document.getElementById('root'));
